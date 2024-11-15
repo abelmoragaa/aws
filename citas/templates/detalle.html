@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle de la Cita{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Cita con {{ cita.nombre }}</h2>
+    <p><small class="text-muted">RUT: {{ cita.rut }}</small></p>
+    <p><small class="text-muted">Fecha y hora: {{ cita.fecha|date:"d/m/Y" }} a las {{ cita.hora }}</small></p>
+    <hr>
+    <p><strong>Motivo:</strong> {{ cita.motivo }}</p>
+
+    {% if request.user.is_authenticated and request.user == cita.autor or request.user.perfil.rol == 'administrador' %}
+        <a href="{% url 'citas:editar_cita' cita.pk %}" class="btn btn-secondary">Editar Cita</a>
+    {% endif %}
+
+    <a href="{% url 'citas:lista_citas' %}" class="btn btn-link mt-3">Volver a la Lista de Citas</a>
+</div>
+{% endblock %}

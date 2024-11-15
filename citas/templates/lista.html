@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Citas{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Lista de Citas</h2>
+    {% if request.user.is_authenticated %}
+        {% if request.user.perfil.rol == 'editor' or request.user.perfil.rol == 'administrador' %}
+            <a href="{% url 'citas:crear_cita' %}" class="btn btn-success mb-3">Crear Cita</a>
+        {% endif %}
+    {% endif %}
+    
+    {% for cita in citas %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Cita con {{ cita.nombre }}</h5>
+                <p class="card-text">RUT: {{ cita.rut }}</p>
+                <p class="card-text">Fecha y hora: {{ cita.fecha|date:"d/m/Y" }} a las {{ cita.hora }}</p>
+                <p class="card-text"><strong>Motivo:</strong> {{ cita.motivo|truncatechars:100 }}</p>
+                <a href="{% url 'citas:detalle_cita' cita.pk %}" class="btn btn-primary">Ver Detalles</a>
+            </div>
+        </div>
+    {% empty %}
+        <p>No hay citas disponibles.</p>
+    {% endfor %}
+</div>
+{% endblock %}
