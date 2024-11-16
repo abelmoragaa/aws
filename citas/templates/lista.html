@@ -19,6 +19,9 @@
                 <p class="card-text">Fecha y hora: {{ cita.fecha|date:"d/m/Y" }} a las {{ cita.hora }}</p>
                 <p class="card-text"><strong>Motivo:</strong> {{ cita.motivo|truncatechars:100 }}</p>
                 <a href="{% url 'citas:detalle_cita' cita.pk %}" class="btn btn-primary">Ver Detalles</a>
+                <a href="{% url 'citas:editar_cita' cita.pk %}" class="btn btn-primary">Editar</a>
+                
+                
             </div>
         </div>
     {% empty %}

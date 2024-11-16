@@ -12,6 +12,7 @@
 
     {% if request.user.is_authenticated and request.user == cita.autor or request.user.perfil.rol == 'administrador' %}
         <a href="{% url 'citas:editar_cita' cita.pk %}" class="btn btn-secondary">Editar Cita</a>
+        
     {% endif %}
 
     <a href="{% url 'citas:lista_citas' %}" class="btn btn-link mt-3">Volver a la Lista de Citas</a>
