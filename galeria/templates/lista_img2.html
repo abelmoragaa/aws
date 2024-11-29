@@ -1,0 +1,29 @@
+{% extends 'vista_panel.html' %}
+
+{% block title %}Galería{% endblock %}
+
+{% block content %}
+<div class="container mt-4 d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card p-4 w-100" style="max-width: 800px; background-color: white; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
+        <h2 class="text-center mb-4">Galería de Imágenes</h2>
+
+        <div class="row">
+            {% for imagen in imagenes %}
+                <div class="col-md-4 mb-3">
+                    <div class="card" style="height: 100%;">
+                        <img src="{{ imagen.imagen.url }}" class="card-img-top" alt="{{ imagen.titulo }}" style="height: 200px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <h5 class="card-title">{{ imagen.titulo }}</h5>
+                            <div>
+                                <a href="{% url 'galeria:detalle_imagen' imagen.pk %}" class="btn btn-primary btn-sm mb-1 w-100">Ver Detalle</a>
+                                <a href="{% url 'galeria:editar_imagen' imagen.pk %}" class="btn btn-primary btn-sm mb-1 w-100">Editar</a>
+                                <a href="{% url 'galeria:eliminar_imagen' imagen.pk %}" class="btn btn-danger btn-sm w-100">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

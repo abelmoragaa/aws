@@ -1,12 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'vista_panel.html' %}
 
 {% block title %}Citas{% endblock %}
 
 {% block content %}
-<div class="container mt-4 d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-    <div class="card p-4 w-100" style="max-width: 800px; background-color: white; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
-        <h2 class="text-center mb-4">Lista de Citas</h2>
-        
+<div class="container mt-4">
+    <div class="bg-white p-4 shadow-sm rounded">
+        <h2 class="mb-4">Lista de Citas</h2>
         {% if request.user.is_authenticated %}
             {% if request.user.perfil.rol == 'editor' or request.user.perfil.rol == 'administrador' %}
                 <a href="{% url 'citas:crear_cita' %}" class="btn btn-success mb-3">Crear Cita</a>
@@ -21,10 +20,11 @@
                     <p class="card-text">Fecha y hora: {{ cita.fecha|date:"d/m/Y" }} a las {{ cita.hora }}</p>
                     <p class="card-text"><strong>Motivo:</strong> {{ cita.motivo|truncatechars:100 }}</p>
                     <a href="{% url 'citas:detalle_cita' cita.pk %}" class="btn btn-primary">Ver Detalles</a>
+                    <a href="{% url 'citas:editar_cita' cita.pk %}" class="btn btn-primary">Editar</a>
                 </div>
             </div>
         {% empty %}
-            <p class="text-center">No hay citas disponibles.</p>
+            <p>No hay citas disponibles.</p>
         {% endfor %}
     </div>
 </div>

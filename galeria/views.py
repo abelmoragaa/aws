@@ -12,7 +12,11 @@ def detalle_imagen(request, pk):
     imagen = get_object_or_404(Imagen, pk=pk)
     return render(request, 'detalle_img.html', {'imagen': imagen,'request':request})
 
-@login_required
+def lista_imagen2(request):
+    imagenes = Imagen.objects.all().order_by('-fecha_subida')
+    return render(request, 'lista_img2.html', {'imagenes': imagenes})
+
+
 def subir_imagen(request):
    # if request.user.perfil.rol in ['editor', 'administrador']:
         if request.method == 'POST':
@@ -45,7 +49,7 @@ def editar_imagen(request, pk):
        # messages.error(request, 'No tienes permiso para editar esta imagen.')
         #return redirect('galeria:detalle_imagen', pk=pk)
     
-@login_required
+
 def eliminar_imagen(request, pk):
     imagen = get_object_or_404(Imagen, pk=pk)
     #if request.user == imagen.autor or request.user.perfil.rol == 'administrador':

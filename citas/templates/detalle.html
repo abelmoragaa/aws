@@ -3,18 +3,14 @@
 {% block title %}Detalle de la Cita{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>Cita con {{ cita.nombre }}</h2>
-    <p><small class="text-muted">RUT: {{ cita.rut }}</small></p>
-    <p><small class="text-muted">Fecha y hora: {{ cita.fecha|date:"d/m/Y" }} a las {{ cita.hora }}</small></p>
-    <hr>
-    <p><strong>Motivo:</strong> {{ cita.motivo }}</p>
-
-    {% if request.user.is_authenticated and request.user == cita.autor or request.user.perfil.rol == 'administrador' %}
-        <a href="{% url 'citas:editar_cita' cita.pk %}" class="btn btn-secondary">Editar Cita</a>
-        
-    {% endif %}
-
-    <a href="{% url 'citas:lista_citas' %}" class="btn btn-link mt-3">Volver a la Lista de Citas</a>
+<div class="container mt-4 d-flex justify-content-center align-items-center" style="height: 80vh;">
+    <div class="card p-4" style="width: 100%; max-width: 600px; background-color: white; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
+        <h2 class="text-center">Cita con {{ cita.nombre }}</h2>
+        <p><strong>RUT:</strong> {{ cita.rut }}</small></p>
+        <p><strong>Fecha y hora:</strong> {{ cita.fecha|date:"d/m/Y" }} a las {{ cita.hora }}</small></p>
+        <hr>
+        <p><strong>Motivo:</strong> {{ cita.motivo }}</p>
+        <a href="{% url 'citas:lista_citas' %}" class="btn btn-link mt-3">Volver a la Lista de Citas</a>
+    </div>
 </div>
 {% endblock %}

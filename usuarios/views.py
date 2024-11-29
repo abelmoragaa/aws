@@ -29,7 +29,7 @@ def login_view(request):#Vista para el inicio de sesión
         usuario = authenticate(request, username=username, password=password)
         if usuario is not None:
             login(request, usuario)
-            return redirect('citas:crear_cita')
+            return redirect('citas:vista_panel') #crear_cita en caso que todo falle
         else:
             messages.error(request, 'Nombre de usuario o contraseña incorrectos.')
     return render(request, 'login.html')

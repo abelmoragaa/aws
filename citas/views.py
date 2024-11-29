@@ -11,6 +11,10 @@ def detalle_cita(request, pk):
     cita = get_object_or_404(Cita, pk=pk)
     return render(request, 'detalle.html', {'cita': cita})
 
+def lista_citas2(request):
+    citas = Cita.objects.all().order_by('-fecha')
+    return render(request, 'lista2.html', {'citas': citas})
+
 @login_required
 def crear_cita(request):
     #if request.user.perfil.rol in ['editor', 'administrador']:
@@ -41,3 +45,8 @@ def editar_cita(request, pk):
     return render(request, 'editar.html', {'form': form})
    # else:
    #     return redirect('citas:lista_citas')
+
+
+def vista_panel(request):
+    # Aquí puedes pasar opciones personalizadas basadas en el rol del usuario
+    return render(request, 'vista_panel.html')  # Nombre del template que vamos a crear
